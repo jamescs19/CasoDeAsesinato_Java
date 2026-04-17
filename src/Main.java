@@ -14,7 +14,7 @@ public class Main {
         System.out.println("Bienvenido detective "+name);
 
         String guilty;
-        int asses =0;
+
 
 
         ArrayList<String> aurelio = new ArrayList<>();
