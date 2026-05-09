@@ -21,6 +21,8 @@ public class Main {
         ArrayList<String> victoria = new ArrayList<>();
         ArrayList<String> bruno = new ArrayList<>();
         ArrayList<String> simon = new ArrayList<>();
+        ArrayList<Forense>forense = new ArrayList<>();
+        ArrayList<Policia>policia = new ArrayList<>();
 
         ArrayList<ArrayList<String>> interrogatorios = new ArrayList<>();
         interrogatorios.add(aurelio);
@@ -35,8 +37,6 @@ public class Main {
         names.add("victoria Mendoza");
         names.add("Bruno Castellano");
         names.add("Simon Quiroga");
-
-
 
 
         System.out.println("Ingrese su edad");
@@ -79,10 +79,11 @@ public class Main {
             do{
                 System.out.println("====DESPACHO=====");
                 System.out.println("1: Revisar pistas");
-                System.out.println("2: Interrogar sospechoso");
-                System.out.println("3: Revisar expediente");
-                System.out.println("4: Resolver el caso");
-                System.out.println("5: Salir");
+                System.out.println("2: Informacion extra");
+                System.out.println("3: Interrogar sospechoso");
+                System.out.println("4: Revisar expediente");
+                System.out.println("5: Resolver el caso");
+                System.out.println("6: Salir");
 
                 System.out.println();
                 System.out.println("Ingrese una opcion");
@@ -102,7 +103,7 @@ public class Main {
 
 
                         if (select >=1 && select <=4) {
-                            System.out.println("Cuantas pistas extras encontrastes de "+names.get(select-1));
+                            System.out.println("Cuantas pistas extras encontrate de "+names.get(select-1));
                             int newClues = sc.nextInt();
                             sc.nextLine();
                             cluesList.set(select-1,cluesList.get(select-1)+newClues);
@@ -112,6 +113,39 @@ public class Main {
                         break;
 
                     case 2:
+                        boolean menu2 = true;
+                        do {
+                            System.out.println("-----QUIEN TIENE INFORMACION EXTRA?-----");
+                            System.out.println("1: Forense");
+                            System.out.println("2: Policia");
+                            System.out.println("3: Salir");
+                            int extra =sc.nextInt();
+                            sc.nextLine();
+
+                            if (extra ==1){
+                                Forense f = Forense.addForense();
+                                if(f !=null) {
+                                    forense.add(f);
+                                    System.out.println("Datos agregados correctamente");
+                                }
+                            }else if (extra == 2){
+                                Policia p = Policia.addPolicia();
+                                if(p !=null) {
+                                    policia.add(p);
+                                    System.out.println("Datos agregados correctamente");
+                                }
+                            } else if(extra ==3){
+                                System.out.println("SALIENDO...");
+                                menu2 = false;
+                            }else {
+                                System.out.println("Error: ingrese una opcion de 1 a 3");
+                            }
+                        }while (menu2);
+
+                        break;
+
+
+                    case 3:
 
                         boolean exit = true;
                         do {
@@ -148,7 +182,7 @@ public class Main {
 
                         break;
 
-                    case 3:
+                    case 4:
 
                         for (int i = 0; i < names.size(); i++) {
                             System.out.println(names.get(i));
@@ -161,20 +195,32 @@ public class Main {
                             }
                         }
 
-                        break;
+                        System.out.println("=====DATOS EXTRAS=====");
+                        for (var f: forense){
+                            f.showInformation();
+                            System.out.println();
+                        }
 
-                    case 4:
-                        System.out.println("Ingrese su veredicto");
-                        guilty= sc.nextLine();
-                        System.out.println("El veredicto final es: "+guilty);
+                        for (var p: policia){
+                            p.showInformation();
+                            System.out.println();
+                        }
+
                         break;
 
                     case 5:
+                        System.out.println("Ingrese su veredicto");
+                        guilty= sc.nextLine();
+                        System.out.println("El veredicto final es: "+guilty);
+                        menu = false;
+                        break;
+
+                    case 6:
                         System.out.println("SALIENDO....");
                         menu = false;
                         break;
                     default:
-                        System.out.println("Ingrese una opcion de 1 a 5");
+                        System.out.println("Ingrese una opcion de 1 a 6");
                         break;
                 }
 
